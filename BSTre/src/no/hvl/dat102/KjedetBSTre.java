@@ -4,8 +4,9 @@ import java.util.Iterator;
 
 import no.hvl.dat102.adt.BSTreADT;
 
+
 //********************************************************************
-// KjedetBinærSøkeTre.java        
+// KjedetBinï¿½rSï¿½keTre.java        
 //
 //********************************************************************
 
@@ -29,7 +30,7 @@ public class KjedetBSTre<T extends Comparable<T>> implements BSTreADT<T>,Iterabl
 	private BinaerTreNode<T> rot;
 
 	/******************************************************************
-	 * Oppretter et tomt binært søketre.
+	 * Oppretter et tomt binï¿½rt sï¿½ketre.
 	 ******************************************************************/
 	public KjedetBSTre() {
 		antall = 0;
@@ -37,7 +38,7 @@ public class KjedetBSTre<T extends Comparable<T>> implements BSTreADT<T>,Iterabl
 	}
 
 	/******************************************************************
-	 * Oppretter et binært søketre med en node..
+	 * Oppretter et binï¿½rt sï¿½ketre med en node..
 	 ******************************************************************/
 	public KjedetBSTre(T element) {
 		rot = new BinaerTreNode<T>(element);
@@ -45,7 +46,7 @@ public class KjedetBSTre<T extends Comparable<T>> implements BSTreADT<T>,Iterabl
 	}
 
 	/*****************************************************************
-	 * Returnerer sann hvis dette binære trett er tomt og usann ellers.
+	 * Returnerer sann hvis dette binï¿½re trett er tomt og usann ellers.
 	 *****************************************************************/
 	@Override
 	public int antall() {
@@ -53,72 +54,152 @@ public class KjedetBSTre<T extends Comparable<T>> implements BSTreADT<T>,Iterabl
 	}
 
 	/*****************************************************************
-	 * Returnerer sann hvis dette binære treet er tom og usann ellers.
+	 * Returnerer sann hvis dette binï¿½re treet er tom og usann ellers.
 	 *****************************************************************/
 	@Override
 	public boolean erTom() {
 		return (antall == 0);
 	}
 	
+	//hoyden for et tre
+	public int hoyde() {
+		return hoydeRek(rot);
+	}
 	
+	private int hoydeRek(BinaerTreNode<T> t) {
+		if(t == null) {
+			return 0;
+		}else {
+		return 1 + Math.max(hoydeRek(t.getVenstre()),hoydeRek(t.getHoyre()));
+		}
+	}
 	/**********************************************************************
-	 * Legger det spesifiserte elementet på passende plass i BS-treet. Like
-	 * elementer blir lagt til høyre. Bruk av rekursiv hjelpemetode.
+	 * Legger det spesifiserte elementet pï¿½ passende plass i BS-treet. Like
+	 * elementer blir lagt til hï¿½yre. Bruk av rekursiv hjelpemetode.
 	 ********************************************************************/
 	@Override
 	public void leggTil(T element) {
 		rot = leggTilRek(rot, element);
 		antall++;
 	}
-
 	private BinaerTreNode<T> leggTilRek(BinaerTreNode<T> p, T element) {
-		// TODO 
-		return null;
+		if(p == null) {
+			return new BinaerTreNode<T>(element);
+		}else {
+			if(element.compareTo(p.getElement()) < 0) {
+				p.setVenstre(leggTilRek(p.getVenstre(), element));
+			}else {
+				p.setHoyre(leggTilRek(p.getHoyre(), element));
+			}
+			return p;
+		}
 	}
-
+	//Metoden for Ã¥ beregne minimal hoyde av et BSTre
+	public int minimumHoyde() {
+		return minimumHoyde(rot);
+	}
+	private int minimumHoyde(BinaerTreNode<T> t) {
+	
+        if (t == null)
+            return 0;
+ 
+        if (t.getVenstre() == null && t.getHoyre() == null)
+            return 1;
+ 
+        if (t.getVenstre() == null)
+            return minimumHoyde(t.getHoyre()) + 1;
+ 
+        if (t.getHoyre() == null)
+            return minimumHoyde(t.getVenstre()) + 1;
+ 
+        return Math.min(minimumHoyde(t.getVenstre()), minimumHoyde(t.getHoyre())) + 1;		
+	}
+	public int maksimalHoyde() {
+		return maksimalHoyde(rot);
+	}
+	private int maksimalHoyde(BinaerTreNode<T> t) {
+		if (t == null)
+            return 0;
+        else
+        {
+        	//beregne 
+            int vHoyde = maksimalHoyde(t.getVenstre());
+            int hHoyde = maksimalHoyde(t.getHoyre());
+  
+            /* use the larger one */
+            if (vHoyde > hHoyde)
+                return (vHoyde + 1);
+             else
+                return (hHoyde + 1);
+        }
+	}
 	/******************************************************************
-	 * Legger det spesifiserte elementet på passende plass i dette binære søketreet.
-	 * Like elementer blir lagt til høyre.
+	 * Legger det spesifiserte elementet pï¿½ passende plass i dette binï¿½re sï¿½ketreet.
+	 * Like elementer blir lagt til hï¿½yre.
 	 ******************************************************************/
 
 	public void leggTil2(T element) {
 		// 
 	}
-
+	
+	//Fjern
 	/******************************************************************
-	 * Fjerner noden med minste verdi fra dette binære søketreet.
+	 * Fjerner noden med minste verdi fra dette binï¿½re sï¿½ketreet.
 	 *********************************************************************/
 	@Override
 	public T fjernMin() {
-		// TODO 
-		return null;
-	}//
-
+		T result = null;
+		if(rot == null) {
+			return null;
+		} else {
+			if(rot.getVenstre() == null) {
+				result = rot.getElement();
+				rot = rot.getHoyre();
+			} else {
+				BinaerTreNode<T> parent = rot;
+				BinaerTreNode<T> current = rot.getVenstre();
+				while(current.getVenstre() != null) {
+					parent = current;
+					current = current.getVenstre();
+				}
+				result = current.getElement();
+				parent.setVenstre(current.getHoyre());
+			}
+			antall--;
+		}
+		return result;
+	}
+	//
 	/******************************************************************
-	 * Fjerner noden med største verdi fra dette binære søketreet.
+	 * Fjerner noden med stï¿½rste verdi fra dette binï¿½re sï¿½ketreet.
 	 ******************************************************************/
 	@Override
 	public T fjernMaks() {
 		// TODO 
 		return null;
-	}//
-
+	}
 	/******************************************************************
-	 * Returnerer det minste elementet i dette binære søketreet.
+	 * Returnerer det minste elementet i dette binï¿½re sï¿½ketreet.
 	 ******************************************************************/
 	@Override
 	public T finnMin() {
-		// TODO 
-		return null;
+		
+		while(rot.getVenstre() !=null) {
+			rot = rot.getVenstre();
+		}
+		return rot.getElement();
 	}//
 
 	/******************************************************************
-	 * Returnerer det største elementet i dette binære søketreet.
+	 * Returnerer det stï¿½rste elementet i dette binï¿½re sï¿½ketreet.
 	 ******************************************************************/
 	@Override
 	public T finnMaks() {
-		// TODO 
-		return null;
+		
+		while(rot.getHoyre()!=null) {
+			rot = rot.getHoyre();
+		}
+		return rot.getElement();
 	}//
 
 	/*******************************************************************************
@@ -127,15 +208,25 @@ public class KjedetBSTre<T extends Comparable<T>> implements BSTreADT<T>,Iterabl
 	 ******************************************************************************/
 	@Override
 	public T finn(T element) {
-		// Søk med rekursiv hjelpemetode
-
-		// return finnRek(element, rot);
-		return null;
+		
+		return finnRek(element, rot);
 	}
 
-	// Den rekursive hjelpemetoden for søking
-	
-	// TODO 
+	private T finnRek(T element, BinaerTreNode<T> p) {
+		
+		T svar = null;
+		if(p != null) {
+			int sml = element.compareTo(p.getElement());
+			if(sml == 0) {
+				svar = p.getElement();
+			} else if(sml < 0) {
+				svar = finnRek(element,p.getVenstre());
+			}else if(sml > 0) {
+				svar = finnRek(element, p.getHoyre());
+			}
+		}
+		return svar;
+	}
 
 	/************************************************************************
 	 * Returnerer en referanse til det spesifiserte elementet hvis det fins i dette
@@ -163,5 +254,24 @@ public class KjedetBSTre<T extends Comparable<T>> implements BSTreADT<T>,Iterabl
 	public Iterator<T> iterator() {
 		return new InordenIterator<T>(rot);
 		
+	}
+
+	@Override
+	public T fjern(T element) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	public void skrivVerdier(T nedre, T ovre){
+		skrivVerdierRek(rot, nedre, ovre);
+		}
+	private void skrivVerdierRek(BinaerTreNode<T> t, T min, T maks){ 
+		if(t != null){   
+			skrivVerdierRek(t.getVenstre(), min, maks);   
+			if((t.getElement().compareTo(min) >= 0) &&(t.getElement().compareTo(maks) <=0)) {
+				System.out.print(t.getElement() + " ");
+				}
+			skrivVerdierRek(t.getHoyre(), min, maks);
+			}
 	}
 }// class

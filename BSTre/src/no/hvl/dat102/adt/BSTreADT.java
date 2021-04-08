@@ -5,7 +5,7 @@ import java.util.*;
 public interface BSTreADT<T extends Comparable<T>> {
 	// Burde hatt javadoc her
 	// Anbefaler at du fyller ut med javadoc her som kan vaere en del av 
-	// øvingen. Flere metoder må fylles ut i implementasjonsfilen.
+	// ï¿½vingen. Flere metoder mï¿½ fylles ut i implementasjonsfilen.
 	//Legg merke til at i denne imlementasjonen er det ikke brukt exceptions som
 	// vi kunne hatt og som vi har brukt for i flere av de andre samlingene.
 
@@ -16,19 +16,19 @@ public interface BSTreADT<T extends Comparable<T>> {
 	public int antall();
 
 	/*****************************************************************
-	 * Returnerer sann hvis dette binære treet er tom og usann ellers.
+	 * Returnerer sann hvis dette binï¿½re treet er tom og usann ellers.
 	 *****************************************************************/
 	public boolean erTom();
 
 	/******************************************************************
-	 * Legger det spesifiserte elementet på passende plass i dette binære søketreet.
-	 * Like elementer blir lagt til høyre.
+	 * Legger det spesifiserte elementet pï¿½ passende plass i dette binï¿½re sï¿½ketreet.
+	 * Like elementer blir lagt til hï¿½yre.
 	 ******************************************************************/
 	public void leggTil(T element);
 
 	/**********************************************************************
 	 * Returnerer en referanse til det spesifiserte elementet hvis det fins i dette
-	 * binære treet ellers returneres null./
+	 * binï¿½re treet ellers returneres null./
 	 ************************************************************************/
 	public T finn(T element);
 	
@@ -38,7 +38,7 @@ public interface BSTreADT<T extends Comparable<T>> {
 	public T finnMin();
 	
 	/*****************************************************************
-	 * Returnerer en referanse til største elementet, null viss tre er tomt.
+	 * Returnerer en referanse til stï¿½rste elementet, null viss tre er tomt.
 	 *****************************************************************/
 	public T finnMaks();
 
@@ -46,8 +46,8 @@ public interface BSTreADT<T extends Comparable<T>> {
 	 * Fjerner et element fra dette treet hvis det fins, ellers returneres null
 	 ************************************************************************/
 	
-	// public T fjern( T element);
-	// Ikke impelmentert
+	public T fjern( T element);
+	
 	
 	/************************************************************************
 	 * Fjerner minste elementet fra dette treet hvis det fins, ellers returneres null
@@ -55,7 +55,7 @@ public interface BSTreADT<T extends Comparable<T>> {
 	public T fjernMin();
 	
 	/************************************************************************
-	 * Fjerner største elementet fra dette treet hvis det fins, ellers returneres null
+	 * Fjerner stï¿½rste elementet fra dette treet hvis det fins, ellers returneres null
 	 ************************************************************************/
 	public T fjernMaks();
 }

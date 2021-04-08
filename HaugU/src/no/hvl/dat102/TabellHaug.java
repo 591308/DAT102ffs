@@ -21,7 +21,7 @@ public class TabellHaug<T extends Comparable<T>> {
   data[antall] = el; // Plasser den nye helt sist
   antall++;
   if (antall > 1)
-   reparerOpp(); // Bytt om oppover hvis nødvendig
+   reparerOpp(); // Bytt om oppover hvis nï¿½dvendig
  }
 
  private void utvidTabell() {
@@ -34,7 +34,15 @@ public class TabellHaug<T extends Comparable<T>> {
  }
 
  private void reparerOpp() {
-  //... fyll ut
+	 int rettPlass= antall-1;
+	 T tmp= data[rettPlass];
+	 int forelder= (rettPlass-1) / 2;
+	 while(rettPlass> 0 && tmp.compareTo(data[forelder]) < 0) {
+		 data[rettPlass] = data[forelder];
+		 rettPlass= forelder;
+		 forelder= (rettPlass-1) / 2;
+		 }
+	 data[rettPlass] = tmp;
  }
 
  public T fjernMinste() {
@@ -42,7 +50,7 @@ public class TabellHaug<T extends Comparable<T>> {
   if (antall > 0) {
    svar = data[0];
    data[0] = data[antall - 1];
-   reparerNed(); // Bytter om nedover hvis nødvendig
+   reparerNed(); // Bytter om nedover hvis nï¿½dvendig
    antall--;
   }
   return svar;
@@ -60,7 +68,7 @@ public class TabellHaug<T extends Comparable<T>> {
  private void reparerNed() {
   T hjelp;
   boolean ferdig = false;
-  int forelder = 0; // Start i roten og sml med neste nivå
+  int forelder = 0; // Start i roten og sml med neste nivï¿½
   int minbarn;
   int vbarn = forelder * 2 + 1;
   int hbarn = vbarn + 1;
@@ -73,7 +81,7 @@ public class TabellHaug<T extends Comparable<T>> {
 
    if ((data[forelder]).compareTo(data[minbarn]) <= 0)
     ferdig = true;
-   else { // Bytt om og gå videre nedover hvis forelder er for stor
+   else { // Bytt om og gï¿½ videre nedover hvis forelder er for stor
     hjelp = data[minbarn];
     data[minbarn] = data[forelder];
     data[forelder] = hjelp;
