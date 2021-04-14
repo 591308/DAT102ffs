@@ -79,6 +79,7 @@ public class KlientBSTre {
 		double alleKjoringane = (a + m)/2;
 		System.out.println("Gjennomsnittleg høyde av alle kjøringane: " + Math.round(alleKjoringane));
 		
+		
 		KjedetBSTre<Integer> bstre;
 		double z = 0;
 		for(int i = 0; i<antall;i++) {
@@ -93,20 +94,20 @@ public class KlientBSTre {
 		System.out.println("Faktiske hoyde av binaertre med 8192 elementer: " + bs.hoyde());
 		
 	
-//		System.out.println("Legger til 5 elementer og fjerner den minste 2 gonga: ");
-//		KjedetBSTre<Integer> bst = new KjedetBSTre<>();
-//		
-//		bst.leggTil(3); bst.leggTil(4); bst.leggTil(2); bst.leggTil(1); bst.leggTil(5);
-//		bst.visInorden();
-//		bst.fjernMin();
-//		bst.visInorden();
-//		bst.fjernMin();
-//		bst.visInorden();
-//		
-//		System.out.println("Legger til elementer og skriver dem ut rekursivt mellom to grense verdier:");
-//		KjedetBSTre<Integer> bstr = new KjedetBSTre<>();
-//		bstr.leggTil(1); bstr.leggTil(5); bstr.leggTil(11); bstr.leggTil(4); bstr.leggTil(8); bstr.leggTil(11); bstr.leggTil(2);
-//		bstr.skrivVerdier(0, 20);
+		System.out.println("Legger til 5 elementer og fjerner den minste 2 gonga: ");
+		KjedetBSTre<Integer> bst = new KjedetBSTre<>();
+		
+		bst.leggTil(3); bst.leggTil(4); bst.leggTil(2); bst.leggTil(1); bst.leggTil(5);
+		bst.visInorden();
+		bst.fjernMin();
+		bst.visInorden();
+		bst.fjernMin();
+		bst.visInorden();
+		
+		System.out.println("Legger til elementer og skriver dem ut rekursivt mellom to grense verdier:");
+		KjedetBSTre<Integer> bstr = new KjedetBSTre<>();
+		bstr.leggTil(1); bstr.leggTil(5); bstr.leggTil(11); bstr.leggTil(4); bstr.leggTil(8); bstr.leggTil(11); bstr.leggTil(2);
+		bstr.skrivVerdier(0, 20);
 	}
 	
 	public static KjedetBSTre<Integer> randomBinarTreGenerator(Integer n){

@@ -98,6 +98,7 @@ public class KjedetBSTre<T extends Comparable<T>> implements BSTreADT<T>,Iterabl
 	public int minimumHoyde() {
 		return minimumHoyde(rot);
 	}
+	
 	private int minimumHoyde(BinaerTreNode<T> t) {
 	
         if (t == null)
@@ -114,9 +115,11 @@ public class KjedetBSTre<T extends Comparable<T>> implements BSTreADT<T>,Iterabl
  
         return Math.min(minimumHoyde(t.getVenstre()), minimumHoyde(t.getHoyre())) + 1;		
 	}
+	//metode for å finne maksimalHoyde
 	public int maksimalHoyde() {
 		return maksimalHoyde(rot);
 	}
+	
 	private int maksimalHoyde(BinaerTreNode<T> t) {
 		if (t == null)
             return 0;
